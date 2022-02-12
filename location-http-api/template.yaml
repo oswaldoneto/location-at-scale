@@ -5,9 +5,15 @@ Description: >
 
 Globals:
   Function:
-    Timeout: 3
+    Timeout: 60
 
 Resources:
+
+  ReceiveQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: ReceiveQueue
+
 
   TransmitFunction:
     Type: AWS::Serverless::Function
@@ -23,7 +29,51 @@ Resources:
           Properties:
             Path: /transmit
             Method: post
-  
+      Environment:
+        Variables:
+          RECEIVE_QUEUE:
+            Ref: ReceiveQueue
+      Policies:
+        - Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Action:
+               - 'SQS:SendMessage'
+
+              Resource:
+                'Fn::Join':
+                  - ''
+                  - - 'arn:aws:sqs:'
+                    - Ref: 'AWS::Region'
+                    - ':'
+                    - Ref: 'AWS::AccountId'
+                    - ':table/'
+                    - Ref: ReceiveQueue
+
+
+
+
+  # ReceiveQueuePolicy:
+  #   Type: AWS::SQS::QueuePolicy
+  #   DependsOn: 
+  #    - ReceiveQueue
+  #   Properties:
+  #     PolicyDocument:
+  #       Version: "2012-10-17"
+  #       Statement:
+  #         - Effect: Allow
+  #           Action:
+  #             - "sqs:SendMessage"
+  #             - "sqs:ReceiveMessage"
+  #           Resource:
+  #             'Fn::Join':
+  #               - ''
+  #               - - Ref: ReceiveQueue
+
+
+
+
+
 Outputs:
   TransmitApi:
     Description: "API Gateway endpoint URL for Prod stage for Transmit function"
