@@ -6,6 +6,6 @@ stack_name = "location-storage-stack"
 s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-d1cd2d13n1i4"
 s3_prefix = "location-storage-stack"
 region = "us-east-1"
-confirm_changeset = true
+confirm_changeset = false
 capabilities = "CAPABILITY_IAM"
 image_repositories = []

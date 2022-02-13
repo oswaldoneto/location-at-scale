@@ -27,6 +27,35 @@ Resources:
             - KeyType: HASH
               AttributeName: Id
 
+  LastKnownPositionFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: location-processor/
+      Handler: localizer.last_known_position
+      Runtime: python3.8
+      Architectures:
+        - x86_64
+      Events:
+        LastLocationEvent:
+          Type: SNS
+          Properties:
+            Topic:
+              Ref: LastLocationTopic
+      Policies:
+      - Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Action:
+          - sns:Subscribe
+          Resource:
+            Fn::Join:
+            - ''
+            - - Ref: LastLocationTopic
+
+
+
+
+
   LocationProcessorFunction:
     Type: AWS::Serverless::Function
     Properties:
