@@ -9,6 +9,9 @@ Globals:
 
 Resources:
 
+  LastLocationTopic:
+    Type: 'AWS::SNS::Topic'
+
   LocationTable:
     Type: 'AWS::DynamoDB::Table'
     Properties:
@@ -18,11 +21,11 @@ Resources:
             WriteCapacityUnits: 1
             ReadCapacityUnits: 1
         AttributeDefinitions:
-            - AttributeName: id
+            - AttributeName: Id
               AttributeType: S
         KeySchema:
             - KeyType: HASH
-              AttributeName: id
+              AttributeName: Id
 
   LocationProcessorFunction:
     Type: AWS::Serverless::Function
@@ -36,6 +39,8 @@ Resources:
         Variables:
           LOCATION_TABLE: 
             Ref: LocationTable
+          LAST_LOCATION_TOPIC:
+            Ref: LastLocationTopic
       Events:
         ReceiveQueueEvent:
           Type: SQS
@@ -57,6 +62,13 @@ Resources:
                     - Ref: 'AWS::AccountId'
                     - ':table/'
                     - Ref: LocationTable
+            - Effect: Allow
+              Action:
+                - 'sns:Publish'
+              Resource:
+                'Fn::Join':
+                  - ''
+                  - - Ref: LastLocationTopic
 
 Outputs:
   LocationProcessorFunction:
