@@ -17,9 +17,14 @@ def receive(event, context):
 
     # it gets data from the body
     data = event["body"]
+    
+    print(RECEIVE_QUEUE)
+    print(data)
 
     # it gets queue from environment variable 
     queue = sqs.get_queue_by_name(QueueName=RECEIVE_QUEUE)
+
+    print(queue)
 
     # it sends data to sqs queue 
     queue.send_message(MessageBody=data)

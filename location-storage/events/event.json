@@ -1,0 +1,20 @@
+{
+  "Records": [
+    {
+      "messageId": "5baf5e81-a79a-4414-ae64-10279e3cd0c2",
+      "receiptHandle": "AQEBgtysHJwUGG4BTmgyz0y+x0XlHW/9/U292SvljwXN6JrAuv+48ygaPsSncd5hYX4yeSoFUYvNANvbRkx4aQxXS3ICm3Z/+pHYrYGz9XzgQcx9ZdQK2M6j0+r0MmV95A3krOk9JKbYZHtOh5wNqpUA6eceYi/fCUo3XRgwLoDg0VIC84KmekZCenSyOmoQDHxWHVKgzVvNLdIAduz4qR5N/grD5j5AtMZhW/9p3eh1Mlw9Nstw0dBtm9BtLDCO5NpGTrCIGW0NPiGF31ZcZ+s0JZk/BmzgtanZuU+y5Gn9yS34xrjqKp+aqkQRK0TE9vUX7RFME/0aSYzmMfp6TdN7vTUBxMJqhEKhG4TCDmGzLWaCFx24cb8KClyGNqDJy5AX",      
+      "body":"{\"DeviceId\": \"c1f304d9-8192-4c1a-90ce-ab1a628f87d2\", \"NMEASentences\": [\"$GPRMC,170944.461,A,2147.400,S,04810.200,W,37.8,190.0,110222,,,A*50\"]}",       
+      "attributes": {
+        "ApproximateReceiveCount": "1",
+        "SentTimestamp": "1644705629612",
+        "SenderId": "AROA5U4OB42CMMXHKILCW:location-http-api-stack-TransmitFunction-Mn1HCoDIMOeZ",
+        "ApproximateFirstReceiveTimestamp": "1644705629619"
+      },
+      "messageAttributes": {},
+      "md5OfBody": "e267e9a1578c4667e334369f16e2c9b9",
+      "eventSource": "aws:sqs",
+      "eventSourceARN": "arn:aws:sqs:us-east-1:938211403396:ReceiveQueue",
+      "awsRegion": "us-east-1"
+    }
+  ]
+}
